@@ -1,21 +1,31 @@
 int smallSquare = 155, bigSquare = 400;
-int innerColor = color(160,102,5);
-int i = 255, sign = 1;
-int extColor1 = color(255, 235, 59),  extColor2 = color(132, 44, 16);
+int innColor = color(160,102,5);
+int i = 250, j = 160, sign = 1, extColor = color(i, j, 1);
   
 void setup() {
   size(600, 600);
+  background(255, 255, 255);
 }
 
 void draw() {
   noStroke();
   
-  fill(color(i%255, 235, 59));
+  if(mousePressed) extColor = color(255, 255, 255);
+  else extColor = color(i, j, 1);
+  
+  fill(extColor);
   rect(width/2 - bigSquare/2, height/2 - bigSquare/2, bigSquare, bigSquare);
   
-  fill(innerColor);
+  fill(innColor);
   rect(width/2 - smallSquare/2, height/2 - smallSquare/2, smallSquare, smallSquare);
   
   
-  i++;
+  i += sign*4;
+  j += sign*4;
+  if(i >= 255 || j >= 160) {
+    sign = -1;
+  }
+  if(i <= 90 || j <= 0) {
+    sign = 1;
+  }
 }
