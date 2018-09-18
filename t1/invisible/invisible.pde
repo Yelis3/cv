@@ -1,5 +1,5 @@
 int circleFill = color(0, 0, 0), lineColor = color(255, 255, 255);
-int circlePosition = 1000;
+int circlePosition = 1000, sign = 1;
 
 void setup() {
   size(1500, 500);
@@ -21,6 +21,9 @@ void draw() {
   
   if(keyPressed && (key == 'l' || key == 'L')) lineColor = color(0, 0, 0);
   else lineColor = color(255, 255, 255);
+  
+  if(keyPressed && (key == 'a' || key == 'A')) moveCircle();
+  else circlePosition = 1000;
   
   stroke(lineColor);
   strokeWeight(20);
@@ -44,4 +47,9 @@ void switchCircleColor() {
 void changeBackgroundColor() {
   lineColor = color(150, 150, 150);
   background(150, 150, 150);
+}
+
+void moveCircle() {
+  if(circlePosition > 1400 || circlePosition < 600) sign = sign*(-1);
+  circlePosition += sign*6;
 }
