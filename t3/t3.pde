@@ -1,3 +1,5 @@
+ArrayList<Frame> controlFrames = new ArrayList<Frame>();
+
 class Boid {
 
   // En algun punto de la clase se hace el 1er punto :v
@@ -11,10 +13,10 @@ class Boid {
   float sc = 3; // scale factor for the render of the boid
   float flap = 0;
   float t = 0;
-  
-  
+
+
   ///////////////////////////////////////////  Declaracion Face to Vertex
-  
+
      float three= 3 * sc;
      float two= 2 * sc;
      int[][] faces= {{0,1,2},
@@ -25,47 +27,47 @@ class Boid {
                        {-three, two, 0},
                        {-three, -two, 0},
                        {-three, 0, two}};
-                       
-                       
-                       
-                       
-                       
+
+
+
+
+
        // for(int i=0;i<4;i++){
        //  for(int j=0;j<3;j++){
        //    int v=faces[i][j];
        //    sh.vertex(vertes[v][0],vertes[v][1],vertes[v][2]);
        //  }
        //}
-                     
-                       
-    ///////////////////////////////////////////  Declaracion Vertex to Vertex               
-                       
-                       
-                       
-                       
+
+
+    ///////////////////////////////////////////  Declaracion Vertex to Vertex
+
+
+
+
       ArrayList< ArrayList<float[]> > figure = new ArrayList< ArrayList<float[]> >();
      float[] vertes0= {three, 0, 0};
      float[] vertes1=  {-three, two, 0};
      float[] vertes2={-three, -two, 0};
      float[] vertes3=  {-three, 0, two};
-    
-    
+
+
      float[] v0= {1, 2, 3};
      float[] v1=  {0, 2, 3};
      float[] v2={0, 1, 3};
      float[] v3=  {0, 1, 2};
-    
+
      ArrayList<float[]> ver0 = new ArrayList<float[]>();
-    
+
      ArrayList<float[]> ver1 = new ArrayList<float[]>();
-    
+
      ArrayList<float[]> ver2 = new ArrayList<float[]>();
-    
+
      ArrayList<float[]> ver3 = new ArrayList<float[]>();
-     
+
      ///////////////////////////////////////////  Fin Declaracion
-  
-  
+
+
 
   PShape sh;   ////////// Modo retenido
   Boid(Vector inPos) {
@@ -90,14 +92,14 @@ class Boid {
     ////////////////////////////////////////////////////   Modo retenido ///////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if(!modeR){
-      
-     
+
+
     sh = createShape();
-      
+
      if(typeR){
-       
-       println("Entro a retenido true");
-       
+
+       // println("Entro a retenido true");
+
        sh.beginShape(TRIANGLE_STRIP);
            sh.stroke(color(255,0, 0));
           sh.fill(color(0, 255, 0, 125));
@@ -107,9 +109,9 @@ class Boid {
            sh.vertex(vertes[v][0],vertes[v][1],vertes[v][2]);
          }
        }
-      
-      
-      
+
+
+
        sh.endShape();
      }
      if(!typeR){
@@ -117,22 +119,22 @@ class Boid {
        ver0.add(vertes0);
        ver0.add(v0);
        figure.add(ver0);
-      
-       
+
+
        ver1.add(vertes1);
        ver1.add(v1);
        figure.add(ver1);
-      
-       
+
+
        ver2.add(vertes2);
        ver2.add(v2);
        figure.add(ver2);
-      
-       
+
+
        ver3.add(vertes3);
        ver3.add(v3);
        figure.add(ver3);
-       
+
        sh.beginShape(TRIANGLE_STRIP);
            sh.stroke(color(0, 255, 0));
           sh.fill(color(255, 0, 0, 125));
@@ -144,55 +146,55 @@ class Boid {
              ArrayList<float[]> ve = figure.get((int) d[j]);
              float[] de = ve.get(0);
              //sh.line(o[0],o[1],o[2],de[0],de[1],de[2]);
-             
+
              int ver=0;
              switch(i){
                case 0:
                  ver =(int) v0[j];
                break;
-               
+
                case 1:
                   ver =(int) v1[j];
                break;
-               
+
                case 2:
                  ver =(int) v2[j];
                break;
-               
+
                case 3:
                  ver =(int) v3[j];
                break;
              }
-             
+
              switch(ver){
                case 0:
                  fill(color(234, 0, 234, 125));
                  sh.vertex(vertes0[0],vertes0[1],vertes0[2]);
                break;
-               
+
                case 1:
                    fill(color(234, 0, 234, 125));
                   sh.vertex(vertes1[0],vertes1[1],vertes1[2]);
                break;
-               
+
                case 2:
                  fill(color(234, 0, 234, 125));
                  sh.vertex(vertes2[0],vertes2[1],vertes2[2]);
-                
+
                break;
-               
+
                case 3:
                  fill(color(234, 0, 234, 125));
                  sh.vertex(vertes3[0],vertes3[1],vertes3[2]);
-                 
+
                break;
              }
            }
          }
-  
+
         sh.endShape();
      }
-     
+
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -301,7 +303,7 @@ class Boid {
 
   void render() {
 
-    
+
 
     pushStyle();
 
@@ -339,7 +341,7 @@ class Boid {
       //////////////////////////////////////////////////////////    Face to vertex  ///////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       if(typeR){
-                        
+
        beginShape(TRIANGLES);
        stroke(color(0, 255, 0));
       fill(color(255, 40, 255, 125));
@@ -351,35 +353,35 @@ class Boid {
         }
        endShape();
       }
-  
-  
+
+
       /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////    Vertex to vertex  ///////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       if(!typeR){
-        
-      
-        
-       
+
+
+
+
        ver0.add(vertes0);
        ver0.add(v0);
        figure.add(ver0);
-      
-       
+
+
        ver1.add(vertes1);
        ver1.add(v1);
        figure.add(ver1);
-      
-       
+
+
        ver2.add(vertes2);
        ver2.add(v2);
        figure.add(ver2);
-      
-       
+
+
        ver3.add(vertes3);
        ver3.add(v3);
        figure.add(ver3);
-       
+
        beginShape(TRIANGLES);
        stroke(color(255, 40, 255));
       fill(color(0, 255, 0, 125));
@@ -388,67 +390,67 @@ class Boid {
            float[] o = v.get(0);
            float[] d = v.get(1);
            for(int j=0; j<3;j++){
-             
+
              //ArrayList<float[]> ve = figure.get((int) d[j]);
              //float[] de = ve.get(0);
              //line(o[0],o[1],o[2],de[0],de[1],de[2]);
-             
-             
+
+
              int ver=0;
              switch(i){
                case 0:
                  ver =(int) v0[j];
                break;
-               
+
                case 1:
                   ver =(int) v1[j];
                break;
-               
+
                case 2:
                  ver =(int) v2[j];
                break;
-               
+
                case 3:
                  ver =(int) v3[j];
                break;
              }
-             
+
              switch(ver){
                case 0:
                  fill(color(234, 0, 234, 125));
                  vertex(vertes0[0],vertes0[1],vertes0[2]);
                break;
-               
+
                case 1:
                    fill(color(234, 0, 234, 125));
                   vertex(vertes1[0],vertes1[1],vertes1[2]);
                break;
-               
+
                case 2:
                  fill(color(234, 0, 234, 125));
                  vertex(vertes2[0],vertes2[1],vertes2[2]);
-                
+
                break;
-               
+
                case 3:
                  fill(color(234, 0, 234, 125));
                  vertex(vertes3[0],vertes3[1],vertes3[2]);
-                 
+
                break;
              }
-             
-             
+
+
            }
        }
-  
+
       endShape();
-  
+
       }
-  
-  
-  
+
+
+
       //draw boid
-    
+
     }
     popStyle();
   }
@@ -497,8 +499,7 @@ int initBoidNum = 900; // amount of boids to start the program with
 ArrayList<Boid> flock;
 Frame avatar;
 boolean animate = true;
-
-
+String curveType = "b";
 
 
 void setup() {
@@ -511,39 +512,34 @@ void setup() {
   // create and fill the list of boids
   flock = new ArrayList();
   for (int i = 0; i < initBoidNum; i++)
-    flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2)));
-
-
-
-
-
-  ////////////////////////////////////////////////////  Inicio curvas ////////////////////////////
-  interpolator =  new Interpolator(scene);
+  flock.add(new Boid(new Vector(flockWidth / 2, flockHeight / 2, flockDepth / 2)));
 }
+
 
 void draw() {
   background(10, 50, 25);
   ambientLight(128, 128, 128);
   directionalLight(255, 255, 255, 0, 1, -100);
   walls();
-
-
   scene.traverse();
 
 
-  ////////////////////////////////////////////////////  Inicio curvas ////////////////////////////
-  pushStyle();
-  strokeWeight(4);
-  stroke(255,0,0);
-  scene.drawPath(interpolator,1);
-  popStyle();
+  // --- DRAW BEZIER, HERMIT AND NATURAL CURVES --- //
+  for(int i = 0; i < controlFrames.size(); i++) {
+    Vector P = controlFrames.get(i).position();
+    pushStyle();
+      stroke(0, 0, 255);
+      strokeWeight(15);
+      point(P.x(), P.y(), P.z());
+    popStyle();
+  }
 
-  // uncomment to asynchronously update boid avatar. See mouseClicked()
-  // updateAvatar(scene.trackedFrame("mouseClicked"));
-  
-  println("Modo:" + modeR);
-  println("Representacion:" + typeR);
+  if(controlFrames.size() != 0) {
+    drawCurve();
+  }
+
 }
+
 
 void walls() {
   pushStyle();
@@ -635,7 +631,7 @@ void mouseWheel(MouseEvent event) {
 }
 
 void keyPressed() {
-  switch (key) {
+  switch(key) {
   case 'a':
     animate = !animate;
     break;
@@ -646,37 +642,41 @@ void keyPressed() {
   case 't':
     scene.shiftTimers();
     break;
-  case 'p':
-    println("Frame rate: " + frameRate);
-    break;
   case 'v':
     avoidWalls = !avoidWalls;
     break;
-  case '+':
-    for(int i=0;i<8;i++){
-      int index = int(random(0,initBoidNum));
-      interpolator.addKeyFrame(flock.get(index).frame);
-    }
-
-
+  case 'b': // Apply the Bezier curve
+    curveType = "b";
     break;
-  case '-':
-    if(!interpolator.keyFrames().isEmpty()){
-      for(int i=0;i<8;i++){
-        interpolator.removeKeyFrame(0);
-      }
+  case 'h': // Apply hermite curve
+    curveType = "h";
+    break;
+  case 'n': // Apply natural curve
+    curveType = "n";
+    break;
+  case 'p':
+    controlFrames.clear();
+    for(int i=0; i<4; i++) {
+      int index = int(random(0, initBoidNum));
+      controlFrames.add(flock.get(index).frame);
     }
+    break;
+  case '+': // Change between 4 and 8 control points
+    break;
+  case '-': // Hide curve
+    controlFrames.clear();
+    break;
   case ' ':
     if (scene.eye().reference() != null)
       resetEye();
     else if (avatar != null)
       thirdPerson();
     break;
-    
+
     case 'm':
     modeR=!modeR;
     break;
-    
+
     case 'c':
     typeR=!typeR;
     break;
