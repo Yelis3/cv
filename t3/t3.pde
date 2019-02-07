@@ -1,4 +1,5 @@
 ArrayList<Frame> controlFrames = new ArrayList<Frame>();
+int n = 4; // Numero de puntos de control para una curva grado n-1
 
 class Boid {
 
@@ -630,6 +631,14 @@ void mouseWheel(MouseEvent event) {
   scene.scale(event.getCount() * 20);
 }
 
+void randomControlPoints() {
+  controlFrames.clear();
+  for(int i=0; i<n; i++) {
+    int index = int(random(0, initBoidNum));
+    controlFrames.add(flock.get(index).frame);
+  }
+}
+
 void keyPressed() {
   switch(key) {
   case 'a':
@@ -649,19 +658,22 @@ void keyPressed() {
     curveType = "b";
     break;
   case 'h': // Apply hermite curve
+    if(n != 4) n = 4;
+    randomControlPoints();
     curveType = "h";
     break;
   case 'n': // Apply natural curve
+    if(n != 4) n = 4;
+    randomControlPoints();
     curveType = "n";
     break;
   case 'p':
-    controlFrames.clear();
-    for(int i=0; i<4; i++) {
-      int index = int(random(0, initBoidNum));
-      controlFrames.add(flock.get(index).frame);
-    }
+    randomControlPoints();
     break;
   case '+': // Change between 4 and 8 control points
+    if(n == 4 && curveType.equals("b")) n = 8;
+    else n = 4;
+    randomControlPoints();
     break;
   case '-': // Hide curve
     controlFrames.clear();
